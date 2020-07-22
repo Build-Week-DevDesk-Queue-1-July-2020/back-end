@@ -1,14 +1,15 @@
-**URL ENDPOINT:** https://bw-devdeskqueue.herokuapp.com/api/
+**URL ENDPOINT:** https://bw-devdeskqueue.herokuapp.com/
 
 ##### Students
 
-| Endpoint  | Description          | Data                                                                  |
-| --------- | -------------------- | --------------------------------------------------------------------- |
-| /register | Register new student | name(string,REQUIRED), cohort(string,REQUIRED), email(string,REQUIRED | UNIQUE), password(string, REQUIRED), |
-| /login    | Login student        | email(string, REQUIRED), password (string, REQUIRED)                  |
+| Endpoint  | Description          | Data                                                                      |
+| --------- | -------------------- | ------------------------------------------------------------------------- |
+| /register | Register new student | name (string, REQUIRED)\cohort (string, REQUIRED)\email (string, REQUIRED | UNIQUE)\password (string, REQUIRED) |
+| /login    | Login student        | email(string, REQUIRED)\password (string, REQUIRED)                       |
+
+###### RESPONSE
 
 ```
-###### RESPONSE
 {
     "student_id": 1,
     "message": "Welcome jane doe!",

@@ -2,10 +2,10 @@
 
 ##### STUDENTS
 
-| Endpoint  | Description          | Data                                                                                |
-| --------- | -------------------- | ----------------------------------------------------------------------------------- |
-| /register | Register new student | name (string, REQUIRED)<br />cohort (string, REQUIRED)<br />email (string, REQUIRED | UNIQUE)<br />password (string, REQUIRED) |
-| /login    | Login student        | email (string, REQUIRED)<br />password (string, REQUIRED)                           |
+| Endpoint           | Description          | Data                                                                                |
+| ------------------ | -------------------- | ----------------------------------------------------------------------------------- |
+| /students/register | Register new student | name (string, REQUIRED)<br />cohort (string, REQUIRED)<br />email (string, REQUIRED | UNIQUE)<br />password (string, REQUIRED) |
+| /students/login    | Login student        | email (string, REQUIRED)<br />password (string, REQUIRED)                           |
 
 ###### RESPONSE
 
@@ -19,10 +19,10 @@
 
 ##### HELPERS
 
-| Endpoint  | Description         | Data                                                      |
-| --------- | ------------------- | --------------------------------------------------------- |
-| /register | Register new helper | name (string, REQUIRED)<br />email (string, REQUIRED      | UNIQUE)<br />password (string, REQUIRED) |
-| /login    | Login helper        | email (string, REQUIRED)<br />password (string, REQUIRED) |
+| Endpoint          | Description         | Data                                                      |
+| ----------------- | ------------------- | --------------------------------------------------------- |
+| /helpers/register | Register new helper | name (string, REQUIRED)<br />email (string, REQUIRED      | UNIQUE)<br />password (string, REQUIRED) |
+| /helpers/login    | Login helper        | email (string, REQUIRED)<br />password (string, REQUIRED) |
 
 ###### RESPONSE
 

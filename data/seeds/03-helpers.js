@@ -3,17 +3,15 @@ const hashedPassword =
     "$2a$14$qHqCbXUImiBOgXlFNX47wuA7uFWNGNAZutYLvOeye9eotewGlfYV6";
 
 exports.seed = async function (knex) {
-    await knex("users").insert([
+    await knex("helpers").insert([
         {
-            username: "janedoe",
+            name: "helper1",
+            email: "helper1@me.com",
             password: hashedPassword,
         },
         {
-            username: "johndoe",
-            password: hashedPassword,
-        },
-        {
-            username: "jackdoe",
+            name: "helper2",
+            email: "helper1@me.com",
             password: hashedPassword,
         },
     ]);

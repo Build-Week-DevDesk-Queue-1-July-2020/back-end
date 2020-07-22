@@ -5,14 +5,16 @@ const helmet = require("helmet");
 const port = process.env.PORT || 5000;
 const cors = require("cors");
 
-const userRouter = require("./routers/users/users-router");
+const studentsRouter = require("./routers/students/students-router");
+const helpersRouter = require("./routers/helpers/helpers-router");
 
 const server = express();
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
-server.use("/api/auth", userRouter);
+server.use("/students", studentsRouter);
+server.use("/helpers", helpersRouter);
 // server.use("/api/articles", restrict(), articlesRouter);
 
 server.use((err, req, res, next) => {

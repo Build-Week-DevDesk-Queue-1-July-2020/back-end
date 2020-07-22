@@ -1,29 +1,29 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const Users = require("./users-model");
+const Helpers = require("./helpers-model");
 // const restrict = require("../../middlewares/restrict");
 
 const router = express.Router();
 
 router.post("/register", async (req, res, next) => {
     try {
-        const { username, password, department } = req.body;
-        const user = await Users.findBy({ username }).first();
+        const { name, email, password } = req.body;
+        const helper = await Helpers.findBy({ email }).first();
 
-        if (user) {
+        if (helper) {
             return res.status(409).json({
-                message: "Username is already taken",
+                message: "Email address is already taken",
             });
         }
 
-        const newUser = await Users.add({
-            username,
-            // hash the password with a time complexity of "14"
+        const newHelper = await Helpers.add({
+            name,
+            email,
             password: await bcrypt.hash(password, 14),
         });
 
-        res.status(201).json(newUser);
+        res.status(201).json(newHelper);
     } catch (err) {
         next(err);
     }
@@ -31,17 +31,17 @@ router.post("/register", async (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
     try {
-        const { username, password } = req.body;
-        const user = await Users.findBy({ username }).first();
+        const { email, password } = req.body;
+        const helper = await Helpers.findBy({ email }).first();
 
-        if (!user) {
+        if (!helper) {
             return res.status(401).json({
                 message: "Invalid Credentials",
             });
         }
 
         // hash the password again and see if it matches what we have in the database
-        const passwordValid = await bcrypt.compare(password, user.password);
+        const passwordValid = await bcrypt.compare(password, helper.password);
 
         if (!passwordValid) {
             return res.status(401).json({
@@ -49,17 +49,15 @@ router.post("/login", async (req, res, next) => {
             });
         }
 
-        console.log(user);
-
         const payload = {
-            userId: user.id,
-            username: user.username,
+            helperId: helper.id,
+            email: helper.email,
         };
 
         res.json({
-            user_id: user.id,
-            user_name: user.username,
-            message: `Welcome ${user.username}!`,
+            helper_id: helper.id,
+            helper_name: helper.name,
+            message: `Welcome ${helper.name}!`,
             token: jwt.sign(payload, process.env.JWT_SECRET),
         });
     } catch (err) {

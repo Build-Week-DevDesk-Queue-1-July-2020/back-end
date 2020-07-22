@@ -56,7 +56,6 @@ router.post("/login", async (req, res, next) => {
 
         res.json({
             helper_id: helper.id,
-            helper_name: helper.name,
             message: `Welcome ${helper.name}!`,
             token: jwt.sign(payload, process.env.JWT_SECRET),
         });

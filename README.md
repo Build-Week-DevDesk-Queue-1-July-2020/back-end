@@ -22,10 +22,10 @@ authe: JSON web tokens
 
 ##### HELPERS
 
-| Endpoint          | Description         | Data                                                      |
-| ----------------- | ------------------- | --------------------------------------------------------- |
-| /helpers/register | Register new helper | name (string, REQUIRED)<br />email (string, REQUIRED      | UNIQUE)<br />password (string, REQUIRED) |
-| /helpers/login    | Login helper        | email (string, REQUIRED)<br />password (string, REQUIRED) |
+| Endpoint          | Description         | Data                                                                                          |
+| ----------------- | ------------------- | --------------------------------------------------------------------------------------------- |
+| /helpers/register | Register new helper | name (string, REQUIRED)<br />email (string, REQUIRED,UNIQUE)<br />password (string, REQUIRED) |
+| /helpers/login    | Login helper        | email (string, REQUIRED)<br />password (string, REQUIRED)                                     |
 
 ###### RESPONSE
 

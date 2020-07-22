@@ -2,10 +2,10 @@
 
 ##### Students
 
-| Endpoint  | Description          | Data                                                                      |
-| --------- | -------------------- | ------------------------------------------------------------------------- |
-| /register | Register new student | name (string, REQUIRED)\cohort (string, REQUIRED)\email (string, REQUIRED | UNIQUE)\password (string, REQUIRED) |
-| /login    | Login student        | email(string, REQUIRED)\password (string, REQUIRED)                       |
+| Endpoint  | Description          | Data                                                                                |
+| --------- | -------------------- | ----------------------------------------------------------------------------------- |
+| /register | Register new student | name (string, REQUIRED)<br />cohort (string, REQUIRED)<br />email (string, REQUIRED | UNIQUE)<br />password (string, REQUIRED) |
+| /login    | Login student        | email(string, REQUIRED)<br />password (string, REQUIRED)                            |
 
 ###### RESPONSE
 

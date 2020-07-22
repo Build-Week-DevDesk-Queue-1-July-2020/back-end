@@ -1,7 +1,7 @@
 **ENDPOINT:** https://bw-devdeskqueue.herokuapp.com
 
 database: Sqlite3
-authentication: JSON web tokens
+authe: JSON web tokens
 
 ##### STUDENTS
 

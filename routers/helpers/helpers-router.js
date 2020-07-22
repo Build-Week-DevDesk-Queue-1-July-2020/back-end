@@ -23,7 +23,9 @@ router.post("/register", async (req, res, next) => {
             password: await bcrypt.hash(password, 14),
         });
 
-        res.status(201).json(newHelper);
+        res.status(201).json({
+            message: "Successfully added new helper.",
+        });
     } catch (err) {
         next(err);
     }

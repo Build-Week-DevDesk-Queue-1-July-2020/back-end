@@ -10,9 +10,17 @@ authe: JSON web tokens
 | /students/register | Register new student | name (string, REQUIRED)<br />cohort (string, REQUIRED)<br />email (string, REQUIRED,UNIQUE)<br />password (string, REQUIRED) |
 | /students/login    | Login student        | email (string, REQUIRED)<br />password (string, REQUIRED)                                                                    |
 
-###### RESPONSE
+###### SUCCESS RESPONSES
 
 ```
+/students/register
+
+{
+  "message": "Successfully added new student"
+}
+
+/students/login
+
 {
     "student_id": 1,
     "message": "Welcome jane doe!",
@@ -27,9 +35,17 @@ authe: JSON web tokens
 | /helpers/register | Register new helper | name (string, REQUIRED)<br />email (string, REQUIRED,UNIQUE)<br />password (string, REQUIRED) |
 | /helpers/login    | Login helper        | email (string, REQUIRED)<br />password (string, REQUIRED)                                     |
 
-###### RESPONSE
+###### SUCCESS RESPONSES
 
 ```
+/helpers/register
+
+{
+  "message": "Successfully added new helper"
+}
+
+/helpers/login
+
 {
   "helper_id": 1,
   "message": "Welcome jane doe!",

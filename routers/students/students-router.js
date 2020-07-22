@@ -25,7 +25,9 @@ router.post("/register", async (req, res, next) => {
             password: await bcrypt.hash(password, 14),
         });
 
-        res.status(201).json(newStudent);
+        res.status(201).json({
+            message: "Successfully added new student.",
+        });
     } catch (err) {
         next(err);
     }

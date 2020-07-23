@@ -32,16 +32,6 @@ router.post("/:id/tickets", (req, res) => {
         });
 });
 
-// router.get("/", (req, res) => {
-//     Tickets.find()
-//         .then((categories) => {
-//             res.json(categories);
-//         })
-//         .catch((err) => {
-//             res.status(500).json({ message: "Failed to get schemes" });
-//         });
-// });
-
 router.put("/:id/tickets/:ticketId", (req, res) => {
     const changes = req.body;
 
@@ -70,22 +60,65 @@ router.put("/:id/tickets/:ticketId", (req, res) => {
         });
 });
 
-// router.delete("/:id", (req, res) => {
-//     const { id } = req.params;
+router.delete("/:id/tickets/:ticketId", (req, res) => {
+    Tickets.remove(req.params.ticketId)
+        .then((deleted) => {
+            if (deleted) {
+                res.json({ message: "Successfully deleted category." });
+            } else {
+                res.status(404).json({
+                    message: "Could not find category with given id",
+                });
+            }
+        })
+        .catch((err) => {
+            res.status(500).json({ message: "Failed to delete category" });
+        });
+});
 
-//     Categories.remove(id)
-//         .then((deleted) => {
-//             if (deleted) {
-//                 res.json({ message: "Successfully deleted category." });
-//             } else {
-//                 res.status(404).json({
-//                     message: "Could not find category with given id",
-//                 });
-//             }
-//         })
-//         .catch((err) => {
-//             res.status(500).json({ message: "Failed to delete category" });
-//         });
-// });
+router.get("/:id/tickets", (req, res) => {
+    Tickets.findBy({
+        student_id: req.params.id,
+        status: "open",
+    }).then((tickets) => {
+        if (tickets) {
+            res.json(tickets);
+        } else {
+            res.status(404).json({
+                message: "Could not find any tickets with given id",
+            });
+        }
+    });
+});
+
+router.get("/:id/tickets/:ticketId", (req, res) => {
+    Tickets.findByIdParam(req.params.ticketId, req.params.id).then(
+        (tickets) => {
+            if (tickets) {
+                res.json(tickets);
+            } else {
+                res.status(404).json({
+                    message: "Could not find any tickets with given id",
+                });
+            }
+        }
+    );
+});
+
+router.get("/:id/tickets/category/:categoryId", (req, res) => {
+    Tickets.findBy({
+        student_id: req.params.id,
+        category_id: req.params.categoryId,
+        status: "open",
+    }).then((tickets) => {
+        if (tickets) {
+            res.json(tickets);
+        } else {
+            res.status(404).json({
+                message: "Could not find any tickets with given id",
+            });
+        }
+    });
+});
 
 module.exports = router;

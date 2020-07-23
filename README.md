@@ -3,7 +3,7 @@
 database: Sqlite3<br />
 authe: JSON web tokens
 
------- STUDENTS
+##### STUDENTS
 
 | Endpoint                | Description          | Data                                                                                                                         |
 | ----------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -13,6 +13,20 @@ authe: JSON web tokens
 ###### SUCCESS RESPONSES
 
 ```
+**DEFAULT STUDENTS**
+{
+    name: "janedoe",
+    cohort: "pt-14",
+    email: "janedoe@me.com",
+    password: abc12345,
+},
+{
+    name: "johndoe",
+    cohort: "pt-14",
+    email: "johndoe@me.com",
+    password: abc12345,
+},
+
 **POST /students/register**
 
 {
@@ -38,6 +52,18 @@ authe: JSON web tokens
 ###### SUCCESS RESPONSES
 
 ```
+**DEFAULT HELPERS**
+{
+    name: "helper1",
+    email: "helper1@me.com",
+    password: abc12345,
+},
+{
+    name: "helper2",
+    email: "helper2@me.com",
+    password: abc12345,
+},
+
 **POST /helpers/register**
 
 {

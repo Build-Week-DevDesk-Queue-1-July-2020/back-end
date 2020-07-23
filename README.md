@@ -13,13 +13,13 @@ authe: JSON web tokens
 ###### SUCCESS RESPONSES
 
 ```
-POST /students/register
+**POST /students/register**
 
 {
   "message": "Successfully added new student"
 }
 
-POST /students/login
+**POST /students/login**
 
 {
     "student_id": 1,
@@ -38,13 +38,13 @@ POST /students/login
 ###### SUCCESS RESPONSES
 
 ```
-POST /helpers/register
+**POST /helpers/register**
 
 {
   "message": "Successfully added new helper"
 }
 
-POST /helpers/login
+**POST /helpers/login**
 
 {
   "helper_id": 1,
@@ -65,7 +65,7 @@ POST /helpers/login
 ###### SUCCESS RESPONSES
 
 ```
-GET /categories
+**GET /categories**
 
 {
     "id": 1,
@@ -80,19 +80,19 @@ GET /categories
     "name": "Nodejs"
 }
 
-POST /categories/add
+**POST /categories/add**
 
 {
   "message": "Successfully added new category."
 }
 
-PATCH /categories/:id
+**PATCH /categories/:id**
 
 {
   "message": "Successfully updated category."
 }
 
-DELETE /categories/:id
+**DELETE /categories/:id**
 
 {
   "message": "Successfully deleted category."

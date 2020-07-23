@@ -22,12 +22,11 @@ exports.up = async function (knex) {
     await knex.schema.createTable("tickets", (table) => {
         table.increments();
         table.text("title").notNull();
-        table.text("description").notNull().unique();
+        table.text("description").notNull();
         table.text("what_ive_tried").notNull();
         table
             .integer("category_id")
             .notNull()
-            .default(0)
             .references("id")
             .inTable("categories")
             .onDelete("SET NULL")
@@ -35,20 +34,18 @@ exports.up = async function (knex) {
         table
             .integer("student_id")
             .notNull()
-            .default(0)
             .references("id")
-            .inTable("student")
+            .inTable("students")
             .onDelete("SET NULL")
             .onUpdate("CASCADE");
         table
             .integer("helper_id")
             .notNull()
-            .default(0)
             .references("id")
             .inTable("helpers")
             .onDelete("SET NULL")
             .onUpdate("CASCADE");
-        table.text("status").notNull().default("open");
+        table.text("status").notNull();
     });
 };
 

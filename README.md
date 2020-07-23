@@ -5,21 +5,21 @@ authe: JSON web tokens
 
 ------ STUDENTS
 
-| Endpoint           | Description          | Data                                                                                                                         |
-| ------------------ | -------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| /students/register | Register new student | name (string, REQUIRED)<br />cohort (string, REQUIRED)<br />email (string, REQUIRED,UNIQUE)<br />password (string, REQUIRED) |
-| /students/login    | Login student        | email (string, REQUIRED)<br />password (string, REQUIRED)                                                                    |
+| Endpoint                | Description          | Data                                                                                                                         |
+| ----------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| POST /students/register | Register new student | name (string, REQUIRED)<br />cohort (string, REQUIRED)<br />email (string, REQUIRED,UNIQUE)<br />password (string, REQUIRED) |
+| POST /students/login    | Login student        | email (string, REQUIRED)<br />password (string, REQUIRED)                                                                    |
 
 ###### SUCCESS RESPONSES
 
 ```
-/students/register
+POST /students/register
 
 {
   "message": "Successfully added new student"
 }
 
-/students/login
+POST /students/login
 
 {
     "student_id": 1,
@@ -30,25 +30,71 @@ authe: JSON web tokens
 
 ##### HELPERS
 
-| Endpoint          | Description         | Data                                                                                          |
-| ----------------- | ------------------- | --------------------------------------------------------------------------------------------- |
-| /helpers/register | Register new helper | name (string, REQUIRED)<br />email (string, REQUIRED,UNIQUE)<br />password (string, REQUIRED) |
-| /helpers/login    | Login helper        | email (string, REQUIRED)<br />password (string, REQUIRED)                                     |
+| Endpoint               | Description         | Data                                                                                          |
+| ---------------------- | ------------------- | --------------------------------------------------------------------------------------------- |
+| POST /helpers/register | Register new helper | name (string, REQUIRED)<br />email (string, REQUIRED,UNIQUE)<br />password (string, REQUIRED) |
+| POST /helpers/login    | Login helper        | email (string, REQUIRED)<br />password (string, REQUIRED)                                     |
 
 ###### SUCCESS RESPONSES
 
 ```
-/helpers/register
+POST /helpers/register
 
 {
   "message": "Successfully added new helper"
 }
 
-/helpers/login
+POST /helpers/login
 
 {
   "helper_id": 1,
   "message": "Welcome jane doe!",
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoZWxwZXJJZCI6MSwiZW1haWwiOiJqYW5lZG9lNkBtZS5jb20iLCJpYXQiOjE1OTUzOTU2NTJ9.EszcZ0-e91qtmK2XeUseDO76Xi59sqXGuWVb_nWypz8"
+}
+```
+
+##### CATEGORIES (restricted route)
+
+| Endpoint               | Description         | Data                    |
+| ---------------------- | ------------------- | ----------------------- |
+| GET /categories/       | Get all categories  |                         |
+| POST /categories/add   | Register new helper | name (string, REQUIRED) |
+| PATCH /categories/:id  | Update category     | name (string, REQUIRED) |
+| DELETE /categories/:id | Delete category     |                         |
+
+###### SUCCESS RESPONSES
+
+```
+GET /categories
+
+{
+    "id": 1,
+    "name": "React"
+},
+{
+    "id": 2,
+    "name": "Express"
+},
+{
+    "id": 3,
+    "name": "Nodejs"
+}
+
+POST /categories/add
+
+{
+  "message": "Successfully added new category."
+}
+
+PATCH /categories/:id
+
+{
+  "message": "Successfully updated category."
+}
+
+DELETE /categories/:id
+
+{
+  "message": "Successfully deleted category."
 }
 ```

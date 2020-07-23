@@ -11,7 +11,7 @@ exports.seed = async function (knex) {
         },
         {
             name: "helper2",
-            email: "helper1@me.com",
+            email: "helper2@me.com",
             password: hashedPassword,
         },
     ]);

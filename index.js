@@ -5,8 +5,10 @@ const helmet = require("helmet");
 const port = process.env.PORT || 5000;
 const cors = require("cors");
 
+const restrict = require("./middlewares/restrict");
 const studentsRouter = require("./routers/students/students-router");
 const helpersRouter = require("./routers/helpers/helpers-router");
+const categoriesRouter = require("./routers/categories/categories-router");
 
 const server = express();
 server.use(helmet());
@@ -15,7 +17,7 @@ server.use(express.json());
 
 server.use("/students", studentsRouter);
 server.use("/helpers", helpersRouter);
-// server.use("/api/articles", restrict(), articlesRouter);
+server.use("/categories", restrict(), categoriesRouter);
 
 server.use((err, req, res, next) => {
     console.log(err);

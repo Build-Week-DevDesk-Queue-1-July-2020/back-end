@@ -1,5 +1,5 @@
 const express = require("express");
-const Tickets = require("./tickets-model.js");
+const Tickets = require("./student-model.js");
 const Categories = require("../categories/categories-model.js");
 const router = express.Router();
 

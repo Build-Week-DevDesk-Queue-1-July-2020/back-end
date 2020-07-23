@@ -6,20 +6,22 @@ const port = process.env.PORT || 5000;
 const cors = require("cors");
 
 const restrict = require("./middlewares/restrict");
-const studentsRouter = require("./routers/students/students-router");
-const helpersRouter = require("./routers/helpers/helpers-router");
+const studentsAuthRouter = require("./routers/students/students-router");
+const helpersAuthRouter = require("./routers/helpers/helpers-router");
 const categoriesRouter = require("./routers/categories/categories-router");
-const ticketsRouter = require("./routers/tickets/tickets-router");
+const studentTicketsRouter = require("./routers/tickets/student-router");
+const helperTicketsRouter = require("./routers/tickets/helper-router");
 
 const server = express();
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
-server.use("/auth/students", studentsRouter);
-server.use("/auth/helpers", helpersRouter);
+server.use("/auth/students", studentsAuthRouter);
+server.use("/auth/helpers", helpersAuthRouter);
 server.use("/categories", restrict(), categoriesRouter);
-server.use("/students", restrict(), ticketsRouter);
+server.use("/students", restrict(), studentTicketsRouter);
+server.use("/helpers", restrict(), helperTicketsRouter);
 
 server.use((err, req, res, next) => {
     console.log(err);

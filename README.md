@@ -13,7 +13,7 @@ authe: JSON web tokens
 ###### SUCCESS RESPONSES
 
 ```
-*** DEFAULT STUDENTS ***
+***DEFAULT STUDENTS***
 {
     name: "janedoe",
     cohort: "pt-14",
@@ -27,13 +27,13 @@ authe: JSON web tokens
     password: abc12345,
 },
 
-*** POST /students/register ***
+***POST /students/register***
 
 {
   "message": "Successfully added new student"
 }
 
-*** POST /students/login ***
+***POST /students/login***
 
 {
     "student_id": 1,
@@ -52,7 +52,7 @@ authe: JSON web tokens
 ###### SUCCESS RESPONSES
 
 ```
-*** DEFAULT HELPERS ***
+***DEFAULT HELPERS***
 {
     name: "helper1",
     email: "helper1@me.com",
@@ -64,13 +64,13 @@ authe: JSON web tokens
     password: abc12345,
 },
 
-*** POST /helpers/register ***
+***POST /helpers/register***
 
 {
   "message": "Successfully added new helper"
 }
 
-*** POST /helpers/login ***
+***POST /helpers/login***
 
 {
   "helper_id": 1,
@@ -91,7 +91,7 @@ authe: JSON web tokens
 ###### SUCCESS RESPONSES
 
 ```
-*** GET /categories ***
+***GET /categories***
 
 {
     "id": 1,
@@ -106,40 +106,38 @@ authe: JSON web tokens
     "name": "Nodejs"
 }
 
-*** POST /categories/add ***
+***POST /categories/add***
 
 {
   "message": "Successfully added new category."
 }
 
-**PATCH /categories/:id**
+***PATCH /categories/:id***
 
 {
   "message": "Successfully updated category."
 }
 
-*** DELETE /categories/:id ***
+***DELETE /categories/:id***
 
 {
   "message": "Successfully deleted category."
 }
 ```
 
-##### TICKETS (restricted route)
+##### STUDENT TICKETS (restricted route)
 
-| Endpoint                                     | Description                                    | Data                                                                                                                             |
-| -------------------------------------------- | ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| GET /student/:id/tickets/                    | Get open tickets by student id                 |                                                                                                                                  |
-| GET /student/:id/tickets/:ticketId           | Get open tickets by student id and ticket id   |                                                                                                                                  |
-| GET /student/:id/tickets/category/categoryId | Get open tickets by student id and category id |                                                                                                                                  |
-| POST /student/:id/tickets/                   | Post new ticket by student id                  | title (string, REQUIRED)<br/>description (string, REQUIRED)<br/>what_ive_tried (string, REQUIRED)<br/>category_id (integer)<br/> |
-| PUT /student/:id/tickets/:ticketId           | Update ticket by id                            | title (string, REQUIRED)<br/>description (string, REQUIRED)<br/>what_ive_tried (string, REQUIRED)<br/>category_id (integer)<br/> |
-| DELETE /student/:id/tickets/:ticketId        | Delete ticket by id                            |                                                                                                                                  |
+| Endpoint                               | Description                    | Data                                                                                                                             |
+| -------------------------------------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| GET /students/:id/tickets/             | Get open tickets by student id |                                                                                                                                  |
+| POST /students/:id/tickets/            | Post new ticket by student id  | title (string, REQUIRED)<br/>description (string, REQUIRED)<br/>what_ive_tried (string, REQUIRED)<br/>category_id (integer)<br/> |
+| PUT /students/:id/tickets/:ticketId    | Update ticket by id            | title (string, REQUIRED)<br/>description (string, REQUIRED)<br/>what_ive_tried (string, REQUIRED)<br/>category_id (integer)<br/> |
+| DELETE /students/:id/tickets/:ticketId | Delete ticket by id            |                                                                                                                                  |
 
 ###### SUCCESS RESPONSES
 
 ```
-*** GET /student/:id/tickets/ ***
+***GET /students/:id/tickets/***
 
 {
     "id": 1,
@@ -160,7 +158,39 @@ authe: JSON web tokens
     "helper_name": "helper1"
 }
 
-*** GET /student/:id/tickets/:ticketId ***
+***POST /students/:id/tickets/***
+
+{
+  "message": "Successfully added new ticket."
+}
+
+***PUT /students/:id/tickets/:ticketId***
+
+{
+  "message": "Successfully updated ticket."
+}
+
+***DELETE /students/:id/tickets/:ticketId***
+
+{
+  "message": "Successfully deleted category."
+}
+```
+
+##### HELPER TICKETS (restricted route)
+
+| Endpoint                                   | Description                     | Data                                                               |
+| ------------------------------------------ | ------------------------------- | ------------------------------------------------------------------ |
+| GET /helpers/tickets/                      | Get open tickets                |                                                                    |
+| GET /helpers/tickets/:ticketId             | Get open tickets by id          |                                                                    |
+| GET /helpers/tickets/category/:categoryId  | Get open tickets by category id |                                                                    |
+| GET /helpers/tickets/category/:status      | Get open tickets by status      | <i>Params: status values</i><br/>open<br/>inprogress<br/>completed |
+| PUT /helpers/:id/tickets/:ticketId/:status | Update ticket by status         | <i>Params: status values</i><br/>open<br/>inprogress<br/>completed |
+
+###### SUCCESS RESPONSES
+
+```
+***GET /helpers/tickets/***
 
 {
     "id": 2,
@@ -168,37 +198,87 @@ authe: JSON web tokens
     "description": "not styling divs",
     "what_ive_tried": "inline styles",
     "category_name": "React",
-    "status": "open",
-    "name": "helper1"
-}
-
-*** GET /student/:id/tickets/category/:categoryId ***
-
+    "by_student": "janedoe",
+    "helper_name": "not assigned",
+    "status": "open"
+},
 {
     "id": 3,
     "title": "React routes",
     "description": "keep getting 500",
     "what_ive_tried": "install packages, rename routes",
     "category_name": "React",
-    "status": "open",
-    "helper_name": "helper1"
+    "by_student": "johndoe",
+    "helper_name": "not assigned",
+    "status": "open"
 }
 
-*** POST /student/:id/tickets/  ***
+***GET /helpers/tickets/:ticketId ***
 
 {
-  "message": "Successfully added new ticket."
+    "id": 2,
+    "title": "React styled components",
+    "description": "not styling divs",
+    "what_ive_tried": "inline styles",
+    "category_name": "React",
+    "by_student": "janedoe",
+    "helper_name": "not assigned",
+    "status": "open"
 }
 
-*** PUT /student/:id/tickets/:ticketId  ***
+***GET /helpers/tickets/category/:categoryId***
+
+{
+    "id": 2,
+    "title": "React styled components",
+    "description": "not styling divs",
+    "what_ive_tried": "inline styles",
+    "category_name": "React",
+    "by_student": "janedoe",
+    "helper_name": "not assigned",
+    "status": "open"
+},
+{
+    "id": 3,
+    "title": "React routes",
+    "description": "keep getting 500",
+    "what_ive_tried": "install packages, rename routes",
+    "category_name": "React",
+    "by_student": "johndoe",
+    "helper_name": "not assigned",
+    "status": "open"
+}
+
+***GET /helpers/tickets/category/:status***
+
+sample url: http://localhost:5000/helpers/tickets/status/open
+
+{
+    "id": 2,
+    "title": "React styled components",
+    "description": "not styling divs",
+    "what_ive_tried": "inline styles",
+    "category_name": "React",
+    "by_student": "janedoe",
+    "helper_name": "not assigned",
+    "status": "open"
+},
+{
+    "id": 3,
+    "title": "React routes",
+    "description": "keep getting 500",
+    "what_ive_tried": "install packages, rename routes",
+    "category_name": "React",
+    "by_student": "johndoe",
+    "helper_name": "not assigned",
+    "status": "open"
+}
+
+***PUT /helpers/:id/tickets/:ticketId/:status***
+
+sample url: http://localhost:5000/helpers/1/tickets/1/assigned
 
 {
   "message": "Successfully updated ticket."
-}
-
-*** DELETE /student/:id/tickets/:ticketId  ***
-
-{
-  "message": "Successfully deleted category."
 }
 ```

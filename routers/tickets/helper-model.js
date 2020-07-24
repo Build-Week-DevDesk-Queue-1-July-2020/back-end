@@ -13,6 +13,7 @@ function findBy(filter) {
     return db("tickets as t")
         .join("categories as c", "c.id", "t.category_id")
         .leftJoin("helpers as h", "h.id", "t.helper_id")
+        .leftJoin("students as s", "s.id", "t.student_id")
         .select(
             "t.id",
             "t.title",
@@ -20,8 +21,9 @@ function findBy(filter) {
             "t.what_ive_tried",
             "t.what_ive_tried",
             "c.name as category_name",
-            "t.status",
-            "h.name as helper_name"
+            "s.name as by_student",
+            "h.name as helper_name",
+            "t.status"
         )
         .where(filter);
 }
@@ -30,10 +32,11 @@ function findById(id) {
     return db("tickets").select("*").where({ id }).first();
 }
 
-async function findByIdParam(id, studentId) {
+async function findByIdParam(id) {
     return await db("tickets as t")
-        .innerJoin("categories as c", "t.category_id", "c.id")
-        .innerJoin("helpers as h", "t.helper_id", "h.id")
+        .join("categories as c", "c.id", "t.category_id")
+        .leftJoin("helpers as h", "h.id", "t.helper_id")
+        .leftJoin("students as s", "s.id", "t.student_id")
         .select(
             "t.id",
             "t.title",
@@ -41,10 +44,11 @@ async function findByIdParam(id, studentId) {
             "t.what_ive_tried",
             "t.what_ive_tried",
             "c.name as category_name",
-            "t.status",
-            "h.name"
+            "s.name as by_student",
+            "h.name as helper_name",
+            "t.status"
         )
-        .where({ "t.id": id, "t.student_id": studentId, "t.status": "open" });
+        .where({ "t.id": id });
 }
 
 function update(changes, id) {

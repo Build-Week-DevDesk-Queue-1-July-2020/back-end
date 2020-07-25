@@ -14,23 +14,12 @@ exports.up = async function (knex) {
         table.text("password").notNull();
     });
 
-    await knex.schema.createTable("categories", (table) => {
-        table.increments();
-        table.text("name").notNull().unique();
-    });
-
     await knex.schema.createTable("tickets", (table) => {
         table.increments();
         table.text("title").notNull();
         table.text("description").notNull();
         table.text("what_ive_tried").notNull();
-        table
-            .integer("category_id")
-            .notNull()
-            .references("id")
-            .inTable("categories")
-            .onDelete("SET NULL")
-            .onUpdate("CASCADE");
+        table.text("category").notNull();
         table
             .integer("student_id")
             .notNull()

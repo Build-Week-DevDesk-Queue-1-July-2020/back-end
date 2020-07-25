@@ -4,9 +4,9 @@ const Tickets = require("./student-model.js");
 const router = express.Router();
 
 router.post("/:id/tickets", (req, res) => {
-    const { title, description, what_ive_tried, category_id } = req.body;
+    const { title, description, what_ive_tried, category } = req.body;
 
-    if (!title || !description || !what_ive_tried) {
+    if (!title || !description || !what_ive_tried || !category) {
         return res.status(404).json({
             message: "Missing required fields.",
         });
@@ -17,7 +17,7 @@ router.post("/:id/tickets", (req, res) => {
         title,
         description,
         what_ive_tried,
-        category_id: category_id ? category_id : 0,
+        category: category.toLowerCase(),
         helper_id: 0,
         status: "open",
     })
@@ -35,7 +35,12 @@ router.post("/:id/tickets", (req, res) => {
 router.put("/:id/tickets/:ticketId", (req, res) => {
     const changes = req.body;
 
-    if (!changes.title || !changes.description || !changes.what_ive_tried) {
+    if (
+        !changes.title ||
+        !changes.description ||
+        !changes.what_ive_tried ||
+        !changes.category
+    ) {
         return res.status(404).json({
             message: "Missing required fields.",
         });

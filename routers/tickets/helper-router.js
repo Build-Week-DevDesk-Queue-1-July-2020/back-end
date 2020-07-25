@@ -86,9 +86,9 @@ router.get("/tickets/status/:status", (req, res) => {
     });
 });
 
-router.get("/tickets/category/:categoryId", (req, res) => {
+router.get("/tickets/category/:category", (req, res) => {
     Tickets.findBy({
-        category_id: req.params.categoryId,
+        category: req.params.category,
         status: "open",
     }).then((tickets) => {
         if (tickets) {

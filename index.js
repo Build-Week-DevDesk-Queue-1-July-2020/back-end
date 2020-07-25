@@ -19,7 +19,7 @@ server.use(express.json());
 
 server.use("/auth/students", studentsAuthRouter);
 server.use("/auth/helpers", helpersAuthRouter);
-server.use("/categories", restrict(), categoriesRouter);
+//server.use("/categories", restrict(), categoriesRouter);
 server.use("/students", restrict(), studentTicketsRouter);
 server.use("/helpers", restrict(), helperTicketsRouter);
 

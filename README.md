@@ -79,60 +79,14 @@ authe: JSON web tokens
 }
 ```
 
-##### CATEGORIES (restricted route)
-
-| Endpoint               | Description         | Data                    |
-| ---------------------- | ------------------- | ----------------------- |
-| GET /categories/       | Get all categories  |                         |
-| POST /categories/add   | Register new helper | name (string, REQUIRED) |
-| PATCH /categories/:id  | Update category     | name (string, REQUIRED) |
-| DELETE /categories/:id | Delete category     |                         |
-
-###### SUCCESS RESPONSES
-
-```
-***GET /categories***
-
-{
-    "id": 1,
-    "name": "React"
-},
-{
-    "id": 2,
-    "name": "Express"
-},
-{
-    "id": 3,
-    "name": "Nodejs"
-}
-
-***POST /categories/add***
-
-{
-  "message": "Successfully added new category."
-}
-
-***PATCH /categories/:id***
-
-{
-  "message": "Successfully updated category."
-}
-
-***DELETE /categories/:id***
-
-{
-  "message": "Successfully deleted category."
-}
-```
-
 ##### STUDENT TICKETS (restricted route)
 
-| Endpoint                               | Description                    | Data                                                                                                                             |
-| -------------------------------------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
-| GET /students/:id/tickets/             | Get open tickets by student id |                                                                                                                                  |
-| POST /students/:id/tickets/            | Post new ticket by student id  | title (string, REQUIRED)<br/>description (string, REQUIRED)<br/>what_ive_tried (string, REQUIRED)<br/>category_id (integer)<br/> |
-| PUT /students/:id/tickets/:ticketId    | Update ticket by id            | title (string, REQUIRED)<br/>description (string, REQUIRED)<br/>what_ive_tried (string, REQUIRED)<br/>category_id (integer)<br/> |
-| DELETE /students/:id/tickets/:ticketId | Delete ticket by id            |                                                                                                                                  |
+| Endpoint                               | Description                    | Data                                                                                                                                   |
+| -------------------------------------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| GET /students/:id/tickets/             | Get open tickets by student id |                                                                                                                                        |
+| POST /students/:id/tickets/            | Post new ticket by student id  | title (string, REQUIRED)<br/>description (string, REQUIRED)<br/>what_ive_tried (string, REQUIRED)<br/>category (string, REQUIRED)<br/> |
+| PUT /students/:id/tickets/:ticketId    | Update ticket by id            | title (string, REQUIRED)<br/>description (string, REQUIRED)<br/>what_ive_tried (string, REQUIRED)<br/>category_id (integer)<br/>       |
+| DELETE /students/:id/tickets/:ticketId | Delete ticket by id            |                                                                                                                                        |
 
 ###### SUCCESS RESPONSES
 
@@ -144,7 +98,7 @@ authe: JSON web tokens
     "title": "Image test",
     "description": "cannot resize test",
     "what_ive_tried": "lorem ipsum test",
-    "category_name": "Uncategorized",
+    "category": "React",
     "status": "open",
     "helper_name": "helper1"
 },
@@ -153,7 +107,7 @@ authe: JSON web tokens
     "title": "React styled components",
     "description": "not styling divs",
     "what_ive_tried": "inline styles",
-    "category_name": "React",
+    "category": "React",
     "status": "open",
     "helper_name": "helper1"
 }
@@ -179,13 +133,13 @@ authe: JSON web tokens
 
 ##### HELPER TICKETS (restricted route)
 
-| Endpoint                                   | Description                     | Data                                                               |
-| ------------------------------------------ | ------------------------------- | ------------------------------------------------------------------ |
-| GET /helpers/tickets/                      | Get open tickets                |                                                                    |
-| GET /helpers/tickets/:ticketId             | Get open tickets by id          |                                                                    |
-| GET /helpers/tickets/category/:categoryId  | Get open tickets by category id |                                                                    |
-| GET /helpers/tickets/category/:status      | Get open tickets by status      | <i>Params: status values</i><br/>open<br/>inprogress<br/>completed |
-| PUT /helpers/:id/tickets/:ticketId/:status | Update ticket by status         | <i>Params: status values</i><br/>open<br/>inprogress<br/>completed |
+| Endpoint                                   | Description                  | Data                                                               |
+| ------------------------------------------ | ---------------------------- | ------------------------------------------------------------------ |
+| GET /helpers/tickets/                      | Get open tickets             |                                                                    |
+| GET /helpers/tickets/:ticketId             | Get open tickets by id       |                                                                    |
+| GET /helpers/tickets/category/:category    | Get open tickets by category |                                                                    |
+| GET /helpers/tickets/category/:status      | Get open tickets by status   | <i>Params: status values</i><br/>open<br/>inprogress<br/>completed |
+| PUT /helpers/:id/tickets/:ticketId/:status | Update ticket by status      | <i>Params: status values</i><br/>open<br/>inprogress<br/>completed |
 
 ###### SUCCESS RESPONSES
 
@@ -197,7 +151,7 @@ authe: JSON web tokens
     "title": "React styled components",
     "description": "not styling divs",
     "what_ive_tried": "inline styles",
-    "category_name": "React",
+    "category": "React",
     "by_student": "janedoe",
     "helper_name": "not assigned",
     "status": "open"
@@ -207,7 +161,7 @@ authe: JSON web tokens
     "title": "React routes",
     "description": "keep getting 500",
     "what_ive_tried": "install packages, rename routes",
-    "category_name": "React",
+    "category": "React",
     "by_student": "johndoe",
     "helper_name": "not assigned",
     "status": "open"
@@ -220,20 +174,22 @@ authe: JSON web tokens
     "title": "React styled components",
     "description": "not styling divs",
     "what_ive_tried": "inline styles",
-    "category_name": "React",
+    "category": "React",
     "by_student": "janedoe",
     "helper_name": "not assigned",
     "status": "open"
 }
 
-***GET /helpers/tickets/category/:categoryId***
+***GET /helpers/tickets/category/:category***
+
+sample url: http://localhost:5000/helpers/tickets/category/react
 
 {
     "id": 2,
     "title": "React styled components",
     "description": "not styling divs",
     "what_ive_tried": "inline styles",
-    "category_name": "React",
+    "category": "React",
     "by_student": "janedoe",
     "helper_name": "not assigned",
     "status": "open"
@@ -243,7 +199,7 @@ authe: JSON web tokens
     "title": "React routes",
     "description": "keep getting 500",
     "what_ive_tried": "install packages, rename routes",
-    "category_name": "React",
+    "category": "React",
     "by_student": "johndoe",
     "helper_name": "not assigned",
     "status": "open"
@@ -258,7 +214,7 @@ sample url: http://localhost:5000/helpers/tickets/status/open
     "title": "React styled components",
     "description": "not styling divs",
     "what_ive_tried": "inline styles",
-    "category_name": "React",
+    "category": "React",
     "by_student": "janedoe",
     "helper_name": "not assigned",
     "status": "open"
@@ -268,7 +224,7 @@ sample url: http://localhost:5000/helpers/tickets/status/open
     "title": "React routes",
     "description": "keep getting 500",
     "what_ive_tried": "install packages, rename routes",
-    "category_name": "React",
+    "category": "React",
     "by_student": "johndoe",
     "helper_name": "not assigned",
     "status": "open"

@@ -11,15 +11,13 @@ function find() {
 
 function findBy(filter) {
     return db("tickets as t")
-        .join("categories as c", "c.id", "t.category_id")
-        .leftJoin("helpers as h", "h.id", "t.helper_id")
+        .innerJoin("helpers as h", "h.id", "t.helper_id")
         .select(
             "t.id",
             "t.title",
             "t.description",
             "t.what_ive_tried",
-            "t.what_ive_tried",
-            "c.name as category_name",
+            "t.category",
             "t.status",
             "h.name as helper_name"
         )
@@ -32,15 +30,13 @@ function findById(id) {
 
 async function findByIdParam(id, studentId) {
     return await db("tickets as t")
-        .innerJoin("categories as c", "t.category_id", "c.id")
         .innerJoin("helpers as h", "t.helper_id", "h.id")
         .select(
             "t.id",
             "t.title",
             "t.description",
             "t.what_ive_tried",
-            "t.what_ive_tried",
-            "c.name as category_name",
+            "t.category",
             "t.status",
             "h.name"
         )

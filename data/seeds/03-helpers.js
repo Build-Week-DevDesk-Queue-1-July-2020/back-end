@@ -8,7 +8,7 @@ exports.seed = async function (knex) {
             id: 0,
             name: "not assigned",
             email: "not assigned",
-            password: "not assigned",
+            password: hashedPassword,
         },
         {
             name: "helper1",

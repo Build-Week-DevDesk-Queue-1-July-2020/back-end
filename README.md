@@ -85,7 +85,7 @@ authe: JSON web tokens
 | -------------------------------------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
 | GET /students/:id/tickets/             | Get open tickets by student id |                                                                                                                                        |
 | POST /students/:id/tickets/            | Post new ticket by student id  | title (string, REQUIRED)<br/>description (string, REQUIRED)<br/>what_ive_tried (string, REQUIRED)<br/>category (string, REQUIRED)<br/> |
-| PUT /students/:id/tickets/:ticketId    | Update ticket by id            | title (string, REQUIRED)<br/>description (string, REQUIRED)<br/>what_ive_tried (string, REQUIRED)<br/>category_id (integer)<br/>       |
+| PUT /students/:id/tickets/:ticketId    | Update ticket by id            | title (string, REQUIRED)<br/>description (string, REQUIRED)<br/>what_ive_tried (string, REQUIRED)<br/>category (integer)<br/>          |
 | DELETE /students/:id/tickets/:ticketId | Delete ticket by id            |                                                                                                                                        |
 
 ###### SUCCESS RESPONSES

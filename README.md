@@ -276,7 +276,7 @@ sample url: http://localhost:5000/helpers/tickets/status/open
 
 ***PUT /helpers/:id/tickets/:ticketId/:status***
 
-sample url: http://localhost:5000/helpers/1/tickets/1/assigned
+sample url: http://localhost:5000/helpers/1/tickets/1/inprogress
 
 {
   "message": "Successfully updated ticket."

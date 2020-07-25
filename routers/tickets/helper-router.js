@@ -14,7 +14,7 @@ router.put("/:id/tickets/:ticketId/:status", (req, res, next) => {
                         statusText = "completed";
                         helper_id = req.params.id;
                         break;
-                    case "assigned":
+                    case "inprogress":
                         statusText = "inprogress";
                         helper_id = req.params.id;
                         break;

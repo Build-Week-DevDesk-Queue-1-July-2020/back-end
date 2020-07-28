@@ -77,4 +77,94 @@ describe("students endpoints", () => {
 
         expect(res.statusCode).toBe(200);
     });
+
+    it("POST tickets by student id", async () => {
+        const user = {
+            name: "jack doe",
+            cohort: "pt-14",
+            email: "jackdoe1@me.com",
+            password: "abcd12345",
+        };
+
+        const reg = await supertest(server)
+            .post("/auth/students/register")
+            .send(user);
+        expect(reg.statusCode).toBe(201);
+
+        const log = await supertest(server).post("/auth/students/login").send({
+            email: "jackdoe1@me.com",
+            password: "abcd12345",
+        });
+
+        const res = await supertest(server)
+            .post("/students/2/tickets")
+            .send({
+                title: "Bacon loprem dolor",
+                description: "cannot resize test",
+                what_ive_tried: "lorem ipsum test",
+                category: "ReactJs",
+            })
+            .set("Authorization", log.body.token);
+
+        expect(res.statusCode).toBe(201);
+        expect(res.body.message).toBe("Successfully added new ticket.");
+    });
+
+    it("PUT tickets by student id", async () => {
+        const user = {
+            name: "jack doe",
+            cohort: "pt-14",
+            email: "jackdoe1@me.com",
+            password: "abcd12345",
+        };
+
+        const reg = await supertest(server)
+            .post("/auth/students/register")
+            .send(user);
+        expect(reg.statusCode).toBe(201);
+
+        const log = await supertest(server).post("/auth/students/login").send({
+            email: "jackdoe1@me.com",
+            password: "abcd12345",
+        });
+
+        const res = await supertest(server)
+            .put("/students/3/tickets/1")
+            .send({
+                title: "UPDATE Bacon loprem dolor",
+                description: "UPDATE cannot resize test",
+                what_ive_tried: "UPDATE lorem ipsum test",
+                category: "UPDATEReactJs",
+            })
+            .set("Authorization", log.body.token);
+
+        expect(res.statusCode).toBe(200);
+        expect(res.body.message).toBe("Successfully updated ticket.");
+    });
+
+    it("DELETE tickets by student id", async () => {
+        const user = {
+            name: "jack doe",
+            cohort: "pt-14",
+            email: "jackdoe1@me.com",
+            password: "abcd12345",
+        };
+
+        const reg = await supertest(server)
+            .post("/auth/students/register")
+            .send(user);
+        expect(reg.statusCode).toBe(201);
+
+        const log = await supertest(server).post("/auth/students/login").send({
+            email: "jackdoe1@me.com",
+            password: "abcd12345",
+        });
+
+        const res = await supertest(server)
+            .delete("/students/3/tickets/1")
+            .set("Authorization", log.body.token);
+
+        expect(res.statusCode).toBe(200);
+        expect(res.body.message).toBe("Successfully deleted ticket.");
+    });
 });

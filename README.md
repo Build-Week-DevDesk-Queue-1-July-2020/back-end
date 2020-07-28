@@ -5,10 +5,10 @@ authe: JSON web tokens
 
 ##### STUDENTS
 
-| Endpoint                | Description          | Data                                                                                                                         |
-| ----------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| POST /students/register | Register new student | name (string, REQUIRED)<br />cohort (string, REQUIRED)<br />email (string, REQUIRED,UNIQUE)<br />password (string, REQUIRED) |
-| POST /students/login    | Login student        | email (string, REQUIRED)<br />password (string, REQUIRED)                                                                    |
+| Endpoint                     | Description          | Data                                                                                                                         |
+| ---------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| POST /auth/students/register | Register new student | name (string, REQUIRED)<br />cohort (string, REQUIRED)<br />email (string, REQUIRED,UNIQUE)<br />password (string, REQUIRED) |
+| POST /auth/students/login    | Login student        | email (string, REQUIRED)<br />password (string, REQUIRED)                                                                    |
 
 ###### SUCCESS RESPONSES
 

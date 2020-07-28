@@ -2,8 +2,8 @@ require("dotenv").config();
 
 const express = require("express");
 const helmet = require("helmet");
-const port = process.env.PORT || 5000;
 const cors = require("cors");
+const port = process.env.PORT || 5000;
 
 const restrict = require("./middlewares/restrict");
 const studentsAuthRouter = require("./routers/students/students-router");

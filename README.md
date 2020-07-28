@@ -92,6 +92,27 @@ authe: JSON web tokens
 ###### SUCCESS RESPONSES
 
 ```
+***GET /students/tickets/***
+
+{
+    "id": 1,
+    "title": "Image test",
+    "description": "cannot resize test",
+    "what_ive_tried": "lorem ipsum test",
+    "category": "React",
+    "status": "open",
+    "helper_name": "helper1"
+},
+{
+    "id": 2,
+    "title": "React styled components",
+    "description": "not styling divs",
+    "what_ive_tried": "inline styles",
+    "category": "React",
+    "status": "open",
+    "helper_name": "helper1"
+}
+
 ***GET /students/:id/tickets/***
 
 {

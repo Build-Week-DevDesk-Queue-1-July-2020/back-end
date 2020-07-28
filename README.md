@@ -44,10 +44,10 @@ authe: JSON web tokens
 
 ##### HELPERS
 
-| Endpoint               | Description         | Data                                                                                          |
-| ---------------------- | ------------------- | --------------------------------------------------------------------------------------------- |
-| POST /helpers/register | Register new helper | name (string, REQUIRED)<br />email (string, REQUIRED,UNIQUE)<br />password (string, REQUIRED) |
-| POST /helpers/login    | Login helper        | email (string, REQUIRED)<br />password (string, REQUIRED)                                     |
+| Endpoint                    | Description         | Data                                                                                          |
+| --------------------------- | ------------------- | --------------------------------------------------------------------------------------------- |
+| POST /auth/helpers/register | Register new helper | name (string, REQUIRED)<br />email (string, REQUIRED,UNIQUE)<br />password (string, REQUIRED) |
+| POST /auth/helpers/login    | Login helper        | email (string, REQUIRED)<br />password (string, REQUIRED)                                     |
 
 ###### SUCCESS RESPONSES
 
@@ -83,6 +83,7 @@ authe: JSON web tokens
 
 | Endpoint                               | Description                    | Data                                                                                                                                   |
 | -------------------------------------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| GET /students/tickets/                 | Get all tickets                |
 | GET /students/:id/tickets/             | Get open tickets by student id |                                                                                                                                        |
 | POST /students/:id/tickets/            | Post new ticket by student id  | title (string, REQUIRED)<br/>description (string, REQUIRED)<br/>what_ive_tried (string, REQUIRED)<br/>category (string, REQUIRED)<br/> |
 | PUT /students/:id/tickets/:ticketId    | Update ticket by id            | title (string, REQUIRED)<br/>description (string, REQUIRED)<br/>what_ive_tried (string, REQUIRED)<br/>category (integer)<br/>          |
@@ -138,7 +139,7 @@ authe: JSON web tokens
 | GET /helpers/tickets/                      | Get open tickets             |                                                                    |
 | GET /helpers/tickets/:ticketId             | Get open tickets by id       |                                                                    |
 | GET /helpers/tickets/category/:category    | Get open tickets by category |                                                                    |
-| GET /helpers/tickets/category/:status      | Get open tickets by status   | <i>Params: status values</i><br/>open<br/>inprogress<br/>completed |
+| GET /helpers/tickets/status/:status        | Get open tickets by status   | <i>Params: status values</i><br/>open<br/>inprogress<br/>completed |
 | PUT /helpers/:id/tickets/:ticketId/:status | Update ticket by status      | <i>Params: status values</i><br/>open<br/>inprogress<br/>completed |
 
 ###### SUCCESS RESPONSES
@@ -152,7 +153,7 @@ authe: JSON web tokens
     "description": "not styling divs",
     "what_ive_tried": "inline styles",
     "category": "React",
-    "by_student": "janedoe",
+    "by_student": "janedoe",`
     "helper_name": "not assigned",
     "status": "open"
 },

@@ -14,7 +14,7 @@ afterAll(async () => {
     await db.destroy();
 });
 
-describe("users tests", () => {
+describe("students endpoints", () => {
     it("POST register", async () => {
         const res = await supertest(server)
             .post("/auth/students/register")
@@ -28,7 +28,53 @@ describe("users tests", () => {
         expect(res.headers["content-type"]).toBe(
             "application/json; charset=utf-8"
         );
-        expect(res.body.id).toBeDefined();
-        expect(res.body.username).toBe("jackdoe1");
+        expect(res.body.message).toBe("Successfully added new student.");
+    });
+
+    it("POST login", async () => {
+        const user = {
+            name: "jack doe",
+            cohort: "pt-14",
+            email: "jackdoe1@me.com",
+            password: "abcd12345",
+        };
+
+        const reg = await supertest(server)
+            .post("/auth/students/register")
+            .send(user);
+        expect(reg.statusCode).toBe(201);
+
+        const res = await supertest(server).post("/auth/students/login").send({
+            email: "jackdoe1@me.com",
+            password: "abcd12345",
+        });
+        expect(res.statusCode).toBe(200);
+        expect(res.body.message).toBe("Welcome jack doe!");
+        expect(res.body.token).toBeDefined();
+    });
+
+    it("GET tickets by student id", async () => {
+        const user = {
+            name: "jack doe",
+            cohort: "pt-14",
+            email: "jackdoe1@me.com",
+            password: "abcd12345",
+        };
+
+        const reg = await supertest(server)
+            .post("/auth/students/register")
+            .send(user);
+        expect(reg.statusCode).toBe(201);
+
+        const log = await supertest(server).post("/auth/students/login").send({
+            email: "jackdoe1@me.com",
+            password: "abcd12345",
+        });
+
+        const res = await supertest(server)
+            .get("/students/3/tickets")
+            .set("Authorization", log.body.token);
+
+        expect(res.statusCode).toBe(200);
     });
 });

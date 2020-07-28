@@ -81,6 +81,18 @@ router.delete("/:id/tickets/:ticketId", (req, res) => {
         });
 });
 
+router.get("/tickets", (req, res) => {
+    Tickets.find().then((tickets) => {
+        if (tickets) {
+            res.json(tickets);
+        } else {
+            res.status(404).json({
+                message: "Could not find any tickets with given id",
+            });
+        }
+    });
+});
+
 router.get("/:id/tickets", (req, res) => {
     Tickets.findBy({
         student_id: req.params.id,

@@ -19,11 +19,11 @@ module.exports = {
         },
     },
 
-    production: {
+    testing: {
         client: "sqlite3",
         useNullAsDefault: true,
         connection: {
-            filename: "./data/production-devDes.db3",
+            filename: "./data/testing-devDes.db3",
         },
         migrations: {
             directory: __dirname + "/data/migrations",

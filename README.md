@@ -204,7 +204,7 @@ authe: JSON web tokens
 
 ***GET /helpers/tickets/category/:category***
 
-sample url: http://localhost:5000/helpers/tickets/category/react
+sample url: /helpers/tickets/category/react
 
 {
     "id": 2,
@@ -229,7 +229,7 @@ sample url: http://localhost:5000/helpers/tickets/category/react
 
 ***GET /helpers/tickets/category/:status***
 
-sample url: http://localhost:5000/helpers/tickets/status/open
+sample url: /helpers/tickets/status/open
 
 {
     "id": 2,

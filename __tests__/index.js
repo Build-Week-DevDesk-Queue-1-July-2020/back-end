@@ -6,6 +6,15 @@ const db = require("../data/config");
 beforeEach(async () => {
     // re-run the seeds and start with a fresh database for each test
     await db.seed.run();
+
+    const user = {
+        name: "jack doe",
+        cohort: "pt-14",
+        email: "jackdoe1@me.com",
+        password: "abcd12345",
+    };
+
+    await supertest(server).post("/auth/students/register").send(user);
 });
 
 // a global jest hook to run after all the tests are done
@@ -21,7 +30,7 @@ describe("students endpoints", () => {
             .send({
                 name: "jack doe",
                 cohort: "pt-14",
-                email: "jackdoe1@me.com",
+                email: "jackdoe2@me.com",
                 password: "abcd12345",
             });
         expect(res.statusCode).toBe(201);
@@ -32,18 +41,6 @@ describe("students endpoints", () => {
     });
 
     it("POST login", async () => {
-        const user = {
-            name: "jack doe",
-            cohort: "pt-14",
-            email: "jackdoe1@me.com",
-            password: "abcd12345",
-        };
-
-        const reg = await supertest(server)
-            .post("/auth/students/register")
-            .send(user);
-        expect(reg.statusCode).toBe(201);
-
         const res = await supertest(server).post("/auth/students/login").send({
             email: "jackdoe1@me.com",
             password: "abcd12345",
@@ -54,18 +51,6 @@ describe("students endpoints", () => {
     });
 
     it("GET tickets by student id", async () => {
-        const user = {
-            name: "jack doe",
-            cohort: "pt-14",
-            email: "jackdoe1@me.com",
-            password: "abcd12345",
-        };
-
-        const reg = await supertest(server)
-            .post("/auth/students/register")
-            .send(user);
-        expect(reg.statusCode).toBe(201);
-
         const log = await supertest(server).post("/auth/students/login").send({
             email: "jackdoe1@me.com",
             password: "abcd12345",
@@ -76,21 +61,22 @@ describe("students endpoints", () => {
             .set("Authorization", log.body.token);
 
         expect(res.statusCode).toBe(200);
+    }, 30000);
+
+    it("GET tickets by student id and ticket id", async () => {
+        const log = await supertest(server).post("/auth/students/login").send({
+            email: "jackdoe1@me.com",
+            password: "abcd12345",
+        });
+
+        const res = await supertest(server)
+            .get("/students/1/tickets/2")
+            .set("Authorization", log.body.token);
+        // console.log("res", res.body);
+        expect(res.statusCode).toBe(200);
     });
 
     it("POST tickets by student id", async () => {
-        const user = {
-            name: "jack doe",
-            cohort: "pt-14",
-            email: "jackdoe1@me.com",
-            password: "abcd12345",
-        };
-
-        const reg = await supertest(server)
-            .post("/auth/students/register")
-            .send(user);
-        expect(reg.statusCode).toBe(201);
-
         const log = await supertest(server).post("/auth/students/login").send({
             email: "jackdoe1@me.com",
             password: "abcd12345",
@@ -111,18 +97,6 @@ describe("students endpoints", () => {
     });
 
     it("PUT tickets by student id", async () => {
-        const user = {
-            name: "jack doe",
-            cohort: "pt-14",
-            email: "jackdoe1@me.com",
-            password: "abcd12345",
-        };
-
-        const reg = await supertest(server)
-            .post("/auth/students/register")
-            .send(user);
-        expect(reg.statusCode).toBe(201);
-
         const log = await supertest(server).post("/auth/students/login").send({
             email: "jackdoe1@me.com",
             password: "abcd12345",
@@ -143,18 +117,6 @@ describe("students endpoints", () => {
     });
 
     it("DELETE tickets by student id", async () => {
-        const user = {
-            name: "jack doe",
-            cohort: "pt-14",
-            email: "jackdoe1@me.com",
-            password: "abcd12345",
-        };
-
-        const reg = await supertest(server)
-            .post("/auth/students/register")
-            .send(user);
-        expect(reg.statusCode).toBe(201);
-
         const log = await supertest(server).post("/auth/students/login").send({
             email: "jackdoe1@me.com",
             password: "abcd12345",

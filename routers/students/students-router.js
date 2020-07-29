@@ -39,7 +39,7 @@ router.post("/login", async (req, res, next) => {
 
         const student = await Students.findBy({ email }).first();
 
-        console.log(student);
+        //console.log(student);
 
         if (!student) {
             return res.status(401).json({

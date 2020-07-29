@@ -56,7 +56,7 @@ router.put("/:id/tickets/:ticketId", (req, res) => {
                 });
             } else {
                 res.status(404).json({
-                    message: "Could not find category with given id",
+                    message: "Could not find ticket with given id",
                 });
             }
         })
@@ -82,44 +82,54 @@ router.delete("/:id/tickets/:ticketId", (req, res) => {
 });
 
 router.get("/tickets", (req, res) => {
-    Tickets.find().then((tickets) => {
-        if (tickets) {
-            res.json(tickets);
-        } else {
-            res.status(404).json({
-                message: "Could not find any tickets with given id",
-            });
-        }
-    });
-});
-
-router.get("/:id/tickets", (req, res) => {
-    Tickets.findBy({
-        student_id: req.params.id,
-        status: "open",
-    }).then((tickets) => {
-        if (tickets) {
-            res.json(tickets);
-        } else {
-            res.status(404).json({
-                message: "Could not find any tickets with given id",
-            });
-        }
-    });
-});
-
-router.get("/:id/tickets/:ticketId", (req, res) => {
-    Tickets.findByIdParam(req.params.ticketId, req.params.id).then(
-        (tickets) => {
-            if (tickets) {
+    Tickets.find()
+        .then((tickets) => {
+            if (tickets.length > 0) {
                 res.json(tickets);
             } else {
                 res.status(404).json({
                     message: "Could not find any tickets with given id",
                 });
             }
-        }
-    );
+        })
+        .catch((err) => {
+            res.status(500).json({ message: "Having issues with the server." });
+        });
+});
+
+router.get("/:id/tickets", (req, res) => {
+    Tickets.findBy({
+        student_id: req.params.id,
+        status: "open",
+    })
+        .then((tickets) => {
+            if (tickets.length > 0) {
+                res.json(tickets);
+            } else {
+                res.status(404).json({
+                    message: "Could not find any tickets with given id",
+                });
+            }
+        })
+        .catch((err) => {
+            res.status(500).json({ message: "Having issues with the server." });
+        });
+});
+
+router.get("/:id/tickets/:ticketId", (req, res) => {
+    Tickets.findByIdParam(req.params.ticketId, req.params.id)
+        .then((tickets) => {
+            if (tickets.length > 0) {
+                res.json(tickets);
+            } else {
+                res.status(404).json({
+                    message: "Could not find any tickets with given id",
+                });
+            }
+        })
+        .catch((err) => {
+            res.status(500).json({ message: "Having issues with the server." });
+        });
 });
 
 router.get("/:id/tickets/category/:categoryId", (req, res) => {
@@ -127,15 +137,19 @@ router.get("/:id/tickets/category/:categoryId", (req, res) => {
         student_id: req.params.id,
         category_id: req.params.categoryId,
         status: "open",
-    }).then((tickets) => {
-        if (tickets) {
-            res.json(tickets);
-        } else {
-            res.status(404).json({
-                message: "Could not find any tickets with given id",
-            });
-        }
-    });
+    })
+        .then((tickets) => {
+            if (tickets.length > 0) {
+                res.json(tickets);
+            } else {
+                res.status(404).json({
+                    message: "Could not find any tickets with category id",
+                });
+            }
+        })
+        .catch((err) => {
+            res.status(500).json({ message: "Having issues with the server." });
+        });
 });
 
 module.exports = router;

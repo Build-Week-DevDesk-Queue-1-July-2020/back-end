@@ -154,6 +154,21 @@ describe("students endpoints", () => {
 });
 
 describe("helpers endpoints", () => {
+    it("POST register", async () => {
+        const res = await supertest(server)
+            .post("/auth/helpers/register")
+            .send({
+                name: "helper4",
+                email: "helper5@me.com",
+                password: "abcd12345",
+            });
+        expect(res.statusCode).toBe(201);
+        expect(res.headers["content-type"]).toBe(
+            "application/json; charset=utf-8"
+        );
+        expect(res.body.message).toBe("Successfully added new helper.");
+    });
+
     it("POST login", async () => {
         const helper = {
             name: "jack doe",

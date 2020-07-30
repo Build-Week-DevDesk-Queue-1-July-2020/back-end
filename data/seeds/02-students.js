@@ -1,4 +1,3 @@
-// pre-hashed password for "abc12345"
 const hashedPassword =
     "$2a$14$qHqCbXUImiBOgXlFNX47wuA7uFWNGNAZutYLvOeye9eotewGlfYV6";
 

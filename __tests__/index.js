@@ -50,32 +50,6 @@ describe("students endpoints", () => {
         expect(res.body.token).toBeDefined();
     });
 
-    it("GET tickets by student id", async () => {
-        const log = await supertest(server).post("/auth/students/login").send({
-            email: "jackdoe1@me.com",
-            password: "abcd12345",
-        });
-
-        const res = await supertest(server)
-            .get("/students/1/tickets")
-            .set("Authorization", log.body.token);
-
-        expect(res.statusCode).toBe(200);
-    }, 30000);
-
-    it("GET tickets by student id and ticket id", async () => {
-        const log = await supertest(server).post("/auth/students/login").send({
-            email: "jackdoe1@me.com",
-            password: "abcd12345",
-        });
-
-        const res = await supertest(server)
-            .get("/students/1/tickets/2")
-            .set("Authorization", log.body.token);
-        // console.log("res", res.body);
-        expect(res.statusCode).toBe(200);
-    });
-
     it("POST tickets by student id", async () => {
         const log = await supertest(server).post("/auth/students/login").send({
             email: "jackdoe1@me.com",
@@ -83,7 +57,7 @@ describe("students endpoints", () => {
         });
 
         const res = await supertest(server)
-            .post("/students/2/tickets")
+            .post("/students/3/tickets")
             .send({
                 title: "POST Bacon loprem dolor",
                 description: "cannot resize test",
@@ -96,14 +70,50 @@ describe("students endpoints", () => {
         expect(res.body.message).toBe("Successfully added new ticket.");
     });
 
-    it("PUT tickets by student id", async () => {
+    it("GET tickets by student id", async () => {
         const log = await supertest(server).post("/auth/students/login").send({
             email: "jackdoe1@me.com",
             password: "abcd12345",
         });
 
         const res = await supertest(server)
-            .put("/students/2/tickets/1")
+            .post("/students/3/tickets")
+            .send({
+                title: "POST Bacon loprem dolor",
+                description: "cannot resize test",
+                what_ive_tried: "lorem ipsum test",
+                category: "reactjs",
+            })
+            .set("Authorization", log.body.token);
+        expect(res.statusCode).toBe(201);
+
+        const get = await supertest(server)
+            .get("/students/3/tickets")
+            .set("Authorization", log.body.token);
+
+        expect(get.statusCode).toBe(200);
+    });
+
+    it("GET tickets by student id and ticket id", async () => {
+        const log = await supertest(server).post("/auth/students/login").send({
+            email: "janedoe@me.com",
+            password: "abc12345",
+        });
+
+        const res = await supertest(server)
+            .get("/students/1/tickets/1")
+            .set("Authorization", log.body.token);
+        expect(res.statusCode).toBe(200);
+    });
+
+    it("PUT tickets by student id", async () => {
+        const log = await supertest(server).post("/auth/students/login").send({
+            email: "janedoe@me.com",
+            password: "abc12345",
+        });
+
+        const res = await supertest(server)
+            .put("/students/1/tickets/2")
             .send({
                 title: "UPDATE Bacon loprem dolor",
                 description: "UPDATE cannot resize test",
@@ -116,28 +126,31 @@ describe("students endpoints", () => {
         expect(res.body.message).toBe("Successfully updated ticket.");
     });
 
-    // it("DELETE tickets by student id", async () => {
-    //     const log = await supertest(server).post("/auth/students/login").send({
-    //         email: "jackdoe1@me.com",
-    //         password: "abcd12345",
-    //     });
+    it("DELETE tickets by student id", async () => {
+        const log = await supertest(server).post("/auth/students/login").send({
+            email: "jackdoe1@me.com",
+            password: "abcd12345",
+        });
 
-    //     const post = await supertest(server)
-    //         .post("/students/2/tickets")
-    //         .send({
-    //             title: "Bacon loprem dolor",
-    //             description: "cannot resize test",
-    //             what_ive_tried: "lorem ipsum test",
-    //             category: "reactjs",
-    //         })
-    //         .set("Authorization", log.body.token);
+        const res = await supertest(server)
+            .post("/students/3/tickets")
+            .send({
+                title: "POST Bacon loprem dolor",
+                description: "cannot resize test",
+                what_ive_tried: "lorem ipsum test",
+                category: "reactjs",
+            })
+            .set("Authorization", log.body.token);
 
-    //     expect(post.statusCode).toBe(201);
+        expect(res.statusCode).toBe(201);
 
-    //     const res = await supertest(server).delete("/students/2/tickets/4");
-    //     expect(res.statusCode).toBe(200);
-    //     expect(res.body.message).toBe("Successfully deleted ticket.");
-    // });
+        const del = await supertest(server)
+            .delete("/students/3/tickets/4")
+            .set("Authorization", log.body.token);
+
+        expect(del.statusCode).toBe(200);
+        expect(del.body.message).toBe("Successfully deleted ticket.");
+    });
 });
 
 describe("helpers endpoints", () => {
@@ -210,7 +223,7 @@ describe("helpers endpoints", () => {
         expect(res.statusCode).toBe(200);
     });
 
-    it("PUT tickets by helper id", async () => {
+    it("PUT tickets status by helper id", async () => {
         const log = await supertest(server).post("/auth/helpers/login").send({
             email: "helper1@me.com",
             password: "abc12345",
